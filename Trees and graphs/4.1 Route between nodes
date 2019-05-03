@@ -1,0 +1,69 @@
+package TreesAndGraphs;
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+import java.util.LinkedList;
+
+/* Given a directed graph, design an algorithm to find out whether there is a route between two nodes */
+
+public class Graph {
+
+    private static int N;
+    private static LinkedList<Integer> adj[];
+
+    Graph(int N) {
+        this.N = N;
+        adj = new LinkedList[N];
+        for (int i = 0; i < N; i++) {
+            adj[i] = new LinkedList();
+        }
+    }
+
+    void addEdge(int v, int w){
+            adj[v].add(w);
+    }
+
+    boolean isReachable(int s, int d) {
+        boolean visited[] = new boolean[N];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(s);
+
+        while(queue.size()!= 0) {
+            s = queue.remove();
+
+            for(int x:adj[s]) {
+                if(!visited[x])
+                    queue.add(x);
+            }
+            if(s == d){
+                return true;
+            }
+            if(!visited[s]){
+                visited[s] = true;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) throws IOException {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            Graph g = new Graph(4);
+            g.addEdge(0, 1);
+            g.addEdge(0, 2);
+            g.addEdge(1, 2);
+            g.addEdge(2, 0);
+            g.addEdge(2, 3);
+            g.addEdge(3, 3);
+
+            /*for(int i = 0; i < 4; i++)
+            {
+                System.out.println(g.adj[i]);
+            }*/
+            if(g.isReachable(3,0))
+                System.out.println("We can reach from vertex 3 to vertex 0");
+            else
+                System.out.println("We cannot reach from vertex 3 to vertex 0");
+    }
+
+
+}
