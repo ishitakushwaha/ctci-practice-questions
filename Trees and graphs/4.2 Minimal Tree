@@ -1,6 +1,6 @@
 package TreesAndGraphs;
-// Given a sorted array [increasing order] with unique integer elements, write an algorithm to create a binary
-// search tree with minimal height
+/* Given a sorted array [increasing order] with unique integer elements, write an algorithm to create a binary
+ search tree with minimal height*/
 
 class Node {
 
