@@ -1,0 +1,50 @@
+package TreesAndGraphs;
+// Given a sorted array [increasing order] with unique integer elements, write an algorithm to create a binary
+// search tree with minimal height
+
+class Node {
+
+    int data;
+    Node left, right;
+
+    Node(int d) {
+        data = d;
+        left = right = null;
+    }
+}
+
+
+
+public class MinimalTree {
+
+    static Node root;
+
+    public Node constructBST(int ar[], int start, int end){
+            if(start > end) {
+                return null;
+            }
+            int mid = (start+end)/2;
+            Node node = new Node(ar[mid]);
+            node.left = constructBST(ar, start, mid-1);
+            node.right = constructBST(ar, mid+1, end);
+            return node;
+    }
+
+    //Print inorder traversal of the constructed BST
+    public void preorder(Node node){
+        if(node == null){
+            return;
+        }
+
+        System.out.println(node.data);
+        preorder(node.left);
+        preorder(node.right);
+    }
+
+    public static void main(String args[]){
+        int ar[] = {1,3,5,7,9,10,15,20};
+        MinimalTree obj = new MinimalTree();
+        Node root = obj.constructBST(ar, 0, 7);
+        obj.preorder(root);
+    }
+}
