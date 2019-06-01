@@ -30,8 +30,8 @@ public class MinimalTree {
             return node;
     }
 
-    //Print inorder traversal of the constructed BST
-    public void inorder(Node node){
+    //Print preorder traversal of the constructed BST
+    public void preorder(Node node){
         if(node == null){
             return;
         }
