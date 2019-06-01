@@ -31,7 +31,7 @@ public class MinimalTree {
     }
 
     //Print inorder traversal of the constructed BST
-    public void preorder(Node node){
+    public void inorder(Node node){
         if(node == null){
             return;
         }
