@@ -1,0 +1,70 @@
+//package TreesAndGraphs;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+//Given a binary tree, design an algorithm which creates a inked list of all the nodes at each depth
+//For example: if you have a tree with depth D, you'll have d linked lists.
+class Node {
+    char data;
+    Node left, right;
+    Node(char n) {
+        data = n;
+        left = right = null;
+    }
+
+}
+
+public class ListOfDepths {
+    void createLevelLinkedList(Node root, ArrayList<LinkedList<Node>> lists, int level) {
+        if(root == null) return; //base case
+
+        LinkedList<Node> list = null;
+        if(lists.size() == level) {
+            list = new LinkedList<Node>();
+            lists.add(list);
+        } else {
+            list = lists.get(level);
+        }
+        list.add(root);
+
+        createLevelLinkedList(root.left, lists, level+1);
+        createLevelLinkedList(root.right, lists, level+1);
+    }
+
+    ArrayList<LinkedList<Node>> createLevelLinkedList(Node root) {
+        ArrayList<LinkedList<Node>> lists = new ArrayList<LinkedList<Node>>();
+        createLevelLinkedList(root, lists, 0);
+        return lists;
+    }
+
+    public static void main(String args[]) {
+        Node n = new Node('A');
+
+        Node b = new Node('B');
+        n.left = b;
+
+
+        Node d = new Node('D');
+        b.left = d;
+
+        Node e = new Node('E');
+        b.right = e;
+
+        Node c = new Node('C');
+        n.right = c;
+
+        Node f = new Node('F');
+        c.left = f;
+
+        ListOfDepths obj = new ListOfDepths();
+        ArrayList<LinkedList<Node>> l = obj.createLevelLinkedList(n);
+        for(LinkedList<Node> x : l) {
+            for(Node q :x) {
+                System.out.print(q.data + " ");
+            }
+            System.out.println();
+        }
+
+    }
+}
